@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+int main(){
+    int num = 0;
+    int ID[100] = {};
+    int sold = 0;
+    int choise = 0;
+    int totalsold = 0;
+    int totalin = 0;
+    int max, min = 0;
+
+    
+    
+    printf("변경할 상품의 갯수: ");
+    scanf("%d", &num);
+
+    // 상품 입고 수량 입력
+    for(int i = 0; i < num; i++){
+        printf("%d번 상품의 입고 수량: ", i+1);
+        scanf("%d", &ID[i]);
+        totalin += ID[i];
+    }
+
+    // 상품 판매 수량 입력
+    for(int i = 0; i < num; i++){
+        printf("%d번 상품의 판매 수량: ", i+1);
+        scanf("%d", &sold);
+        ID[i] -= sold;
+        totalsold += sold;
+        if(sold > max) max = sold;
+        if(sold < min) min = sold;
+
+    }
+
+    // 재고 조회
+    while(1){
+        printf("ID를 입력하여 재고 수량을 확인하세요 (-1 입력 시 종료): ");
+        scanf("%d", &choise);
+
+        // 종료 조건
+        if(choise == -1) break;
+
+        // ID 범위 체크
+        if(choise > 0 && choise <= num){
+            printf("해당 상품의 잔여 수량은 %d개 입니다\n", ID[choise-1]);
+        } else {
+            printf("유효하지 않은 ID입니다. 다시 입력하세요.\n");
+        }
+    }
+
+    // 전체 상품의 잔여 수량 출력
+    for(int i = 0; i < num; i++){
+        printf("%d번 상품의 잔여 수량: %d\n", i + 1, ID[i]);
+    }
+    
+    // 총 판매량과 판매율 출력
+    float per = ((float)totalsold/(float)totalin) * 100;
+    printf("총판매량: %d(판매율 %.2f%)", totalsold, per);
+    
+
+    printf("\n가장 많이 판매된 상품: %d\n", max);
+    printf("가장 적게 판매된 상품: %d\n", min);
+    
+    //재고 보충이 필요한 상품
+
+
+
+    return 0;
+}
