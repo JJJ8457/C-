@@ -7,7 +7,8 @@ int main(){
     int choise = 0;
     int totalsold = 0;
     int totalin = 0;
-    int max, min = 0;
+    int max = 0;
+    int min = 99999;
 
     
     
@@ -62,8 +63,9 @@ int main(){
     printf("가장 적게 판매된 상품: %d\n", min);
     
     //재고 보충이 필요한 상품
-
-
-
+    for(int i = 0; i < num; i++){
+        if(ID[i] < 2) printf("상품 ID %d: 재고 부족", i+1);
+    }
+    
     return 0;
 }
